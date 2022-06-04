@@ -29,7 +29,7 @@ jobs:
           --config k3d.yaml
     - name: Deploy the app
       run: |
-        kubectl apply sprint-boot-helloworld.yaml
+        kubectl apply -f sprint-boot-helloworld.yaml
     - name: Test
       run: |
         kubectl run test --image alpine -i --restart Never -- sh -c "apk add --update curl && curl sprint-boot-helloworld:8080"
