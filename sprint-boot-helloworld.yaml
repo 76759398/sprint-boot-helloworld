@@ -22,7 +22,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: springboot-helloworld-svc
+  name: springboot-helloworld
 spec:
   selector:
     app: spring-boot-helloworld
