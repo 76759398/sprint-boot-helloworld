@@ -32,6 +32,6 @@ jobs:
         kubectl apply sprint-boot-helloworld.yaml
     - name: Test
       run: |
-        kubectl run test --image alpine -i --restart Never -- sh -c "apk add --update curl && curl sprint-boot-helloworld"
+        kubectl run test --image alpine -i --restart Never -- sh -c "apk add --update curl && curl sprint-boot-helloworld:8080"
   
 
