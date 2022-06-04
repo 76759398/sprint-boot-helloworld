@@ -1,0 +1,22 @@
+apiVersion: k3d.io/v1alpha4
+kind: Simple
+image: rancher/k3s:latest
+servers: 1
+agents: 1
+ports:
+  - port: 0.0.0.0:80:80
+    nodeFilters:
+      - agent:0:direct
+  - port: 0.0.0.0:443:443
+    nodeFilters:
+      - agent:0:direct
+  - port: 0.0.0.0:5053:53/udp
+    nodeFilters:
+      - agent:0:direct
+options:
+  k3d:
+    wait: true
+    timeout: "60s"
+  kubeconfig:
+    updateDefaultKubeconfig: true
+    switchCurrentContext: true

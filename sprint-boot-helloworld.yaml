@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-helloworld
+spec:
+  selector:
+    matchLabels:
+      app: spring-boot-helloworld
+  replicas: 2 
+  template:
+    metadata:
+      labels:
+        app: spring-boot-helloworld
+    spec:
+      containers:
+        - name: spring-boot-helloworld
+          image: 76759398/sprint-boot-helloworld:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-helloworld
+spec:
+  selector:
+    app: spring-boot-helloworld
+  ports:
+    - protocol: "TCP"
+      port: 8080
+      targetPort: 8080
+  type: NodePort

@@ -1,4 +1,4 @@
-name: Docker Image Build and Push CI
+name: Docker Image Build and Push CICD
 
 on:
   push:
@@ -14,12 +14,27 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Publish to Docker Hub
+    - name: Build and Publish to Docker Hub
       uses: docker/build-push-action@v1     
       with:       
         username: ${{ secrets.DOCKER_HUB_USERNAME }} 
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
         repository: 76759398/sprint-boot-helloworld    
         tags: latest
+    - name: Create a Temp K8s cluster
+      uses: AbsaOSS/k3d-action@v2.3.0
+      with:
+        cluster-name: test
+        args: >-
+          --config k3d.yaml
+    - name: Deploy the app
+      run: |
+        kubectl apply -f sprint-boot-helloworld.yaml
+    - name: Sleep for 30 seconds
+      run: sleep 60s
+      shell: bash
+    - name: Test the service
+      run: |
+        kubectl run test --image alpine/curl -i --restart Never -- "spring-boot-helloworld:8080"
   
 
