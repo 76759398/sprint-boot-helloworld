@@ -1,4 +1,4 @@
-name: Docker Image Build and Push CI
+name: Docker Image Build and Push CI CD
 
 on:
   push:
@@ -21,5 +21,17 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
         repository: 76759398/sprint-boot-helloworld    
         tags: latest
+    - name: Create a cluster
+      uses: AbsaOSS/k3d-action@v1.4.0
+      with:
+        cluster-name: test
+        args: >-
+          --config k3d.yaml
+    - name: Deploy the app
+      run: |
+        kubectl apply sprint-boot-helloworld.yaml
+    - name: Test
+      run: |
+        kubectl run test --image alpine -i --restart Never -- sh -c "apk add --update curl && curl sprint-boot-helloworld"
   
 
