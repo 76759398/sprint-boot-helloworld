@@ -1,6 +1,6 @@
-apiVersion: k3d.io/v1alpha3
+apiVersion: k3d.io/v1alpha4
 kind: Simple
-image: docker.io/rancher/k3s:v1.20.5-k3s1
+image: rancher/k3s:latest
 servers: 1
 agents: 1
 ports:
@@ -17,12 +17,6 @@ options:
   k3d:
     wait: true
     timeout: "60s"
-    disableLoadbalancer: true
-  k3s:
-    extraArgs:
-      - arg: --no-deploy=traefik,servicelb,metrics-server
-        nodeFilters:
-          - server:*
   kubeconfig:
     updateDefaultKubeconfig: true
     switchCurrentContext: true
