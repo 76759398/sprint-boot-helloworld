@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: spring-boot-helloworld
-          image: 76759398/spring-boot-helloworld:latest
+          image: 76759398/sprint-boot-helloworld:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080 
@@ -22,7 +22,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: springboot-helloworld
+  name: spring-boot-helloworld
 spec:
   selector:
     app: spring-boot-helloworld
