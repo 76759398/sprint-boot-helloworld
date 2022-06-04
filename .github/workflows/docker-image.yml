@@ -22,7 +22,7 @@ jobs:
         repository: 76759398/sprint-boot-helloworld    
         tags: latest
     - name: Create a cluster
-      uses: AbsaOSS/k3d-action@v1.4.0
+      uses: AbsaOSS/k3d-action@v2.3.0
       with:
         cluster-name: test
         args: >-
