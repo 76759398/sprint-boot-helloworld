@@ -35,6 +35,6 @@ jobs:
       shell: bash
     - name: Test the service
       run: |
-        kubectl run test --image alpine/curl -i --restart Never -- sh -c "curl spring-boot-helloworld:8080"
+        kubectl run test --image alpine/curl -i --restart Never -- "spring-boot-helloworld:8080"
   
 
