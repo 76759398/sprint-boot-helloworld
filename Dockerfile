@@ -18,4 +18,5 @@ FROM openjdk:8-alpine
 WORKDIR /opt/demo
 # copy over the built artifact from the maven image
 COPY --from=stage1 /opt/demo/target/spring-boot-helloworld-0.0.1-SNAPSHOT.jar /opt/demo
+EXPOSE 8080
 ENTRYPOINT ["java","-jar","/opt/demo/spring-boot-helloworld-0.0.1-SNAPSHOT.jar"]
